@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App App Component should match the snapshot 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="App-header"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <h2>
+      Welcome to Westeros
+    </h2>
+  </div>
+  <div
+    className="Display-info"
+  >
+    <CardContainer
+      houses={
+        Array [
+          Object {
+            "name": "House Corbray of Heart's Home",
+          },
+          Object {
+            "name": "House Dayne of Starfall",
+          },
+          Object {
+            "name": "House Hightower of the Hightower",
+          },
+        ]
+      }
+    />
+  </div>
+</div>
+`;

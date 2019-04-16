@@ -1,6 +1,6 @@
-export const setPeople = (person) => ({
-  type: "SET_PEOPLE",
-  person
+export const setHouses = (houses) => ({
+  type: "SET_HOUSES",
+  houses
 })
 
 export const setLoading = (loading) => ({

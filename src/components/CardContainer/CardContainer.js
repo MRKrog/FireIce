@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../Card/Card';
 
-const CardContainer = ({ people }) => {
+const CardContainer = ({ houses }) => {
 
-  let allCards = people.map((person, index) => <Card key={index} {...person} />)
+  let allCards = houses.map((house, index) => <Card key={index} {...house} />)
 
   return (
     <div className="CardContainer">
