@@ -1,5 +1,7 @@
 .Card {
   padding: 1em;
+  cursor: pointer;
+
   .Card-Row {
     margin-bottom: 1em;
     text-align: center;
@@ -9,6 +11,12 @@
       font-weight: 100;
       span {
         font-weight: bold;
+      }
+      ul {
+        padding: 0;
+        li {
+          list-style-type: none;
+        }
       }
     }
   }
