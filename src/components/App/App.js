@@ -5,7 +5,7 @@ import * as actions from '../../actions/index';
 import CardContainer from '../CardContainer/CardContainer';
 import Loading from '../Loading/Loading';
 
-class App extends Component {
+export class App extends Component {
 
   componentDidMount(){
     this.props.setLoading(true)
@@ -18,7 +18,7 @@ class App extends Component {
       const response = await fetch(url)
       if(!response.ok) { throw new Error('Bad Fetch')}
       const data = await response.json()
-      this.props.setPeople(data)
+      this.props.setHouses(data)
       this.props.setLoading(false)
     } catch (error) {
         console.log(error.message);
@@ -27,7 +27,7 @@ class App extends Component {
 
 
   render() {
-    const { people, loading } = this.props
+    const { houses, loading } = this.props
     return (
       <div className='App'>
         <div className='App-header'>
@@ -37,7 +37,7 @@ class App extends Component {
         <div className='Display-info'>
         {
           !loading ?
-          <CardContainer people={people}/> :
+          <CardContainer houses={houses}/> :
           <Loading />
         }
         </div>
@@ -47,12 +47,12 @@ class App extends Component {
 }
 
 export const mapStateToProps = (state) => ({
-  people: state.people,
+  houses: state.houses,
   loading: state.loading
 })
 
 export const mapDispatchToProps=(dispatch) => ({
-  setPeople: (data) => dispatch(actions.setPeople(data)),
+  setHouses: (data) => dispatch(actions.setHouses(data)),
   setLoading: (data) => dispatch(actions.setLoading(data)),
 })
 
