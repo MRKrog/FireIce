@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
+import CardContainer from '../CardContainer/CardContainer';
 
 class App extends Component {
 
@@ -25,6 +25,7 @@ class App extends Component {
 
 
   render() {
+    const { people } = this.props
     return (
       <div className='App'>
         <div className='App-header'>
@@ -32,6 +33,7 @@ class App extends Component {
           <h2>Welcome to Westeros</h2>
         </div>
         <div className='Display-info'>
+          <CardContainer people={people}/>
         </div>
       </div>
     );
