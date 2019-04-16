@@ -16,6 +16,15 @@
         padding: 0;
 
       }
+      section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        li {
+          list-style-type: disc;
+        }
+      }
+
     }
   }
   li {

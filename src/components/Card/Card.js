@@ -69,7 +69,7 @@ class Card extends Component {
           members.length > 0 &&
           <h4>
             <span>Members:</span>
-            <ul>{displayMembers}</ul>
+            <section>{displayMembers}</section>
           </h4>
         }
         </div>
