@@ -23,6 +23,7 @@ class Card extends Component {
   render() {
     const { name, founded, seats, titles, coatOfArms, ancestralWeapons, words } = this.props;
     const { members } = this.state;
+
     let displayMembers;
     if(members.length > 0) {
       displayMembers = members.map((member, index) => {
@@ -38,7 +39,11 @@ class Card extends Component {
           <h3><span>Founded</span> {founded ? founded : 'N/A'}</h3>
         </div>
         <div className="Card-Row">
-          <h4><span>Seats:</span> {seats}</h4>
+          <h4><span>Seats:</span>
+            {
+              seats.length ? seats.map((seat) => (<li key={seat}>{seat}</li>)) : '-'
+            }
+          </h4>
         </div>
         <div className="Card-Row">
           <h4><span>Titles:</span> {titles}</h4>
@@ -47,7 +52,11 @@ class Card extends Component {
           <h4><span>Coat Of Arms:</span> {coatOfArms}</h4>
         </div>
         <div className="Card-Row">
-          <h4><span>Ancestral Weapons:</span> {ancestralWeapons}</h4>
+          <h4><span>Ancestral Weapons:</span>
+            {
+              ancestralWeapons.length ? ancestralWeapons.map((weaps) => (<li key={weaps}>{weaps}</li>)) : '-'
+            }
+          </h4>
         </div>
         <div className="Card-Row">
         {
