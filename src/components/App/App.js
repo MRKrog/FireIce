@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
 
 class App extends Component {
+
+  componentDidMount(){
+    this.getPeople()
+  }
+
+  getPeople = async () => {
+    try {
+      const url = "http://localhost:3001/api/v1/houses";
+      const response = await fetch(url)
+      console.log(response);
+      const data = await response.json()
+      console.log(data);
+      this.props.setPeople(data)
+    } catch (error) {
+        console.log(error.message);
+    }
+  }
+
 
   render() {
     return (
@@ -18,4 +38,13 @@ class App extends Component {
   }
 }
 
-export default App;
+export const mapStateToProps = (state) => ({
+  people: state.people
+})
+
+export const mapDispatchToProps=(dispatch) => ({
+  setPeople: (data) => dispatch(actions.setPeople(data))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
