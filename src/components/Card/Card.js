@@ -1,38 +1,72 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { combineMembers } from '../../utility/fetchSworn'
 
-const Card = ({ name, founded, seats, titles, coatOfArms, ancestralWeapons, words }) => {
-  return (
-    <div className="Card">
-      <div className="Card-Row">
-        <label>Name:</label>
-        <h4>{name}</h4>
+class Card extends Component {
+  constructor() {
+    super()
+    this.state = {
+      members: []
+    }
+  }
+
+  handleClick = (e) => {
+    e.preventDefault()
+    this.retrieveMembers()
+  }
+
+  retrieveMembers = async () => {
+    const { swornMembers } = this.props;
+    const found = await combineMembers(swornMembers)
+    this.setState({ members: found })
+  }
+
+  render() {
+    const { name, founded, seats, titles, coatOfArms, ancestralWeapons, words } = this.props;
+    const { members } = this.state;
+    let displayMembers;
+    if(members.length > 0) {
+      displayMembers = members.map((member, index) => {
+        return <li key={index}>{member}</li>
+      })
+    }
+    return (
+      <div className="Card" onClick={this.handleClick}>
+        <div className="Card-Row">
+          <h1>{name}</h1>
+        </div>
+        <div className="Card-Row">
+          <h3><span>Founded</span> {founded ? founded : 'N/A'}</h3>
+        </div>
+        <div className="Card-Row">
+          <h4><span>Seats:</span> {seats}</h4>
+        </div>
+        <div className="Card-Row">
+          <h4><span>Titles:</span> {titles}</h4>
+        </div>
+        <div className="Card-Row">
+          <h4><span>Coat Of Arms:</span> {coatOfArms}</h4>
+        </div>
+        <div className="Card-Row">
+          <h4><span>Ancestral Weapons:</span> {ancestralWeapons}</h4>
+        </div>
+        <div className="Card-Row">
+        {
+          words &&
+          <h4><span>Words:</span> {words}</h4>
+        }
+        </div>
+        <div className="Card-Row">
+        {
+          members.length > 0 &&
+          <h4>
+            <span>Members:</span>
+            <ul>{displayMembers}</ul>
+          </h4>
+        }
+        </div>
       </div>
-      <div className="Card-Row">
-        <label>Founded:</label>
-        <h4>{founded}</h4>
-      </div>
-      <div className="Card-Row">
-        <label>Seats:</label>
-        <h4>{seats}</h4>
-      </div>
-      <div className="Card-Row">
-        <label>Titles:</label>
-        <h4>{titles}</h4>
-      </div>
-      <div className="Card-Row">
-        <label>Coat Of Arms:</label>
-        <h4>{coatOfArms}</h4>
-      </div>
-      <div className="Card-Row">
-        <label>Ancestral Weapons:</label>
-        <h4>{ancestralWeapons}</h4>
-      </div>
-      <div className="Card-Row">
-        <label>Word:</label>
-        <h4>{words}</h4>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Card;
