@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
+import CardContainer from '../CardContainer/CardContainer';
+import Loading from '../Loading/Loading';
 
 class App extends Component {
 
   componentDidMount(){
+    this.props.setLoading(true)
     this.getPeople()
   }
 
@@ -14,10 +16,10 @@ class App extends Component {
     try {
       const url = "http://localhost:3001/api/v1/houses";
       const response = await fetch(url)
-      console.log(response);
+      if(!response.ok) { throw new Error('Bad Fetch')}
       const data = await response.json()
-      console.log(data);
       this.props.setPeople(data)
+      this.props.setLoading(false)
     } catch (error) {
         console.log(error.message);
     }
@@ -25,6 +27,7 @@ class App extends Component {
 
 
   render() {
+    const { people, loading } = this.props
     return (
       <div className='App'>
         <div className='App-header'>
@@ -32,6 +35,11 @@ class App extends Component {
           <h2>Welcome to Westeros</h2>
         </div>
         <div className='Display-info'>
+        {
+          !loading ?
+          <CardContainer people={people}/> :
+          <Loading />
+        }
         </div>
       </div>
     );
@@ -39,11 +47,13 @@ class App extends Component {
 }
 
 export const mapStateToProps = (state) => ({
-  people: state.people
+  people: state.people,
+  loading: state.loading
 })
 
 export const mapDispatchToProps=(dispatch) => ({
-  setPeople: (data) => dispatch(actions.setPeople(data))
+  setPeople: (data) => dispatch(actions.setPeople(data)),
+  setLoading: (data) => dispatch(actions.setLoading(data)),
 })
 
 
